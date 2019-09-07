@@ -4,8 +4,8 @@ ScriptsOnlyBuild:
     - BackgroundController
     - CameraController
     - CharacterController
+    - GamePlayUIController
     - SwordController
-    - UIController
     - VariableJoystick
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
@@ -20,8 +20,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -494,10 +496,10 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 4fe67c81278536e082f4f5c804ef4adc
+      Hash: f23b68f534d59d8a92c2e1a32525bf14
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: UIController
+    className: GamePlayUIController
   - hash:
       serializedVersion: 2
       Hash: 5372ed2ce39229b1ac910757999a8be2
@@ -590,7 +592,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: 11e41846d37fa44d447656d4582b20ab
+      Hash: 6df7f08c05c78d0c2d0e4c917428395c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CharacterController

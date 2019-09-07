@@ -18,7 +18,7 @@ public class BackgroundController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (character.GetComponent<CharacterController>().IsMoveRight())
+        if (character.GetComponent<SpriteRenderer>().flipX == false)
         {
             offset = character.transform.position.x - gameObject.transform.position.x;
             if (offset > 0)
@@ -31,7 +31,7 @@ public class BackgroundController : MonoBehaviour
                 gameObject.transform.position = new Vector3(posX, gameObject.transform.position.y, gameObject.transform.position.z);
             }
         }
-        else if (character.GetComponent<CharacterController>().IsMoveLeft())
+        else
         {
             offset = character.transform.position.x - gameObject.transform.position.x;
             if (offset < 0)

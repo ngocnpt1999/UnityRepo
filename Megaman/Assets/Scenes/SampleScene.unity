@@ -5105,7 +5105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 1153973908}
-  canvas: {fileID: 2060706621}
   variableJoystick: {fileID: 1261259368}
   animator: {fileID: 1856082771}
   body2D: {fileID: 1856082773}
@@ -6099,4 +6098,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpButton: {fileID: 1824735610}
   attackButton: {fileID: 782014276}
-  target: {fileID: 1856082769}
+  character: {fileID: 1856082769}

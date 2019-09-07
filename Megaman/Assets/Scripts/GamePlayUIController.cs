@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+public class GamePlayUIController : MonoBehaviour
 {
     public Button jumpButton;
     public Button attackButton;
-    public GameObject target;
+    public GameObject character;
 
     private bool holding;
 
@@ -16,9 +16,12 @@ public class UIController : MonoBehaviour
         holding = false;
     }
 
-    public bool AttackButtonIsHolding()
+    private void Update()
     {
-        return holding;
+        if (holding)
+        {
+            character.GetComponent<CharacterController>().Charge();
+        }
     }
 
     public void OnAttackButtonPressed()
@@ -28,18 +31,18 @@ public class UIController : MonoBehaviour
 
     public void OnAttackButtonReleased()
     {
-        if (target.GetComponent<CharacterController>().CanAction())
+        if (character.GetComponent<CharacterController>().CanAction())
         {
-            target.GetComponent<CharacterController>().Attack();
+            character.GetComponent<CharacterController>().Attack();
         }
         holding = false;
     }
 
     public void OnJumpButtonClick()
     {
-        if (target.GetComponent<CharacterController>().CanAction())
+        if (character.GetComponent<CharacterController>().CanAction())
         {
-            target.GetComponent<CharacterController>().Jump();
+            character.GetComponent<CharacterController>().Jump();
         }
     }
 }
