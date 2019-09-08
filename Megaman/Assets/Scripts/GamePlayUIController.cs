@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class GamePlayUIController : MonoBehaviour
 {
-    public Button jumpButton;
-    public Button attackButton;
     public GameObject character;
 
     private bool holding;
@@ -43,6 +41,14 @@ public class GamePlayUIController : MonoBehaviour
         if (character.GetComponent<CharacterController>().CanAction())
         {
             character.GetComponent<CharacterController>().Jump();
+        }
+    }
+
+    public void OnSurfButtonClick()
+    {
+        if (character.GetComponent<CharacterController>().CanAction())
+        {
+            character.GetComponent<CharacterController>().Surf();
         }
     }
 }

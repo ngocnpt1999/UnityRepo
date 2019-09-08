@@ -15,17 +15,21 @@ public class CharacterController : MonoBehaviour
     private const int move = 1;
     private const int jump = 2;
     private const int fallDown = 3;
+    private const int surf = 4;
     private const int charge = 7;
     private const int combo1 = 8;
     private const int combo2 = 9;
     private const int combo3 = 10;
     private const int skyAttack = 11;
     private const int chargeAttack = 12;
+    private const int surfAttack = 14;
 
     public GameObject sword;
     public VariableJoystick variableJoystick;
     public Animator animator;
     public Rigidbody2D body2D;
+    public CapsuleCollider2D capsuleCollider2D;
+    public BoxCollider2D boxCollider2D;
     public double speed;
     public double jumpHeight;
 
@@ -44,7 +48,7 @@ public class CharacterController : MonoBehaviour
     {
         if (canAction == true)
         {
-            if (body2D.velocity.y < -1)
+            if (body2D.velocity.y < -1 && animator.GetInteger("status") != surf)
             {
                 FallingDown();
             }
@@ -57,11 +61,6 @@ public class CharacterController : MonoBehaviour
                 }
             }
 
-            if (animator.GetInteger("status") == chargeAttack)
-            {
-                Idle();
-            }
-
             if (animator.GetInteger("status") >= combo1 && animator.GetInteger("status") <= combo3)
             {
                 delayTime += Time.deltaTime;
@@ -72,7 +71,7 @@ public class CharacterController : MonoBehaviour
             }
             else
             {
-                if (animator.GetInteger("status") != charge)
+                if (animator.GetInteger("status") != charge && animator.GetInteger("status") != surf)
                 {
                     if (variableJoystick.Direction.x > 0)
                     {
@@ -88,6 +87,18 @@ public class CharacterController : MonoBehaviour
                         {
                             Idle();
                         }
+                    }
+                }
+
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("surf"))
+                {
+                    if (gameObject.GetComponent<SpriteRenderer>().flipX)
+                    {
+                        gameObject.transform.Translate(new Vector3((float)(-speed * 1.3 * Time.deltaTime), 0, 0));
+                    }
+                    else
+                    {
+                        gameObject.transform.Translate(new Vector3((float)(speed * 1.3 * Time.deltaTime), 0, 0));
                     }
                 }
             }
@@ -168,21 +179,42 @@ public class CharacterController : MonoBehaviour
         animator.SetInteger("status", fallDown);
     }
 
-    void AttackCombo1()
+    public void Surf()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("move"))
+        {
+            animator.SetInteger("status", surf);
+            capsuleCollider2D.enabled = false;
+            boxCollider2D.enabled = true;
+        }
+    }
+
+    public void SurfAnimationFinished()
+    {
+        boxCollider2D.enabled = false;
+        capsuleCollider2D.enabled = true;
+        if (animator.GetInteger("status") != surfAttack)
+        {
+            Idle();
+        }
+    }
+
+    void NormalAttack1()
     {
         delayTime = 0;
         canAction = false;
         animator.SetInteger("status", combo1);
     }
 
-    void AttackCombo2()
+    void NormalAttack2()
     {
         delayTime = 0;
         canAction = false;
         animator.SetInteger("status", combo2);
     }
 
-    void AttackCombo3()
+    void NormalAttack3()
     {
         delayTime = 0;
         canAction = false;
@@ -201,6 +233,12 @@ public class CharacterController : MonoBehaviour
         animator.SetInteger("status", chargeAttack);
     }
 
+    public void SurfAttack()
+    {
+        canAction = false;
+        animator.SetInteger("status", surfAttack);
+    }
+
     public void Attack()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("jump") ||
@@ -210,11 +248,11 @@ public class CharacterController : MonoBehaviour
         }
         else if (animator.GetInteger("status") == combo1)
         {
-            AttackCombo2();
+            NormalAttack2();
         }
         else if (animator.GetInteger("status") == combo2)
         {
-            AttackCombo3();
+            NormalAttack3();
         }
         else if (chargeTime >= 0.5)
         {
@@ -223,7 +261,7 @@ public class CharacterController : MonoBehaviour
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("charge") ||
                  animator.GetInteger("status") == combo3)
         {
-            AttackCombo1();
+            NormalAttack1();
         }
     }
 
@@ -231,6 +269,10 @@ public class CharacterController : MonoBehaviour
     {
         sword.GetComponent<SwordController>().ResetPosition();
         canAction = true;
+        if (animator.GetInteger("status") == chargeAttack || animator.GetInteger("status") == surfAttack)
+        {
+            Idle();
+        }
     }
 
     public bool CanAction()
