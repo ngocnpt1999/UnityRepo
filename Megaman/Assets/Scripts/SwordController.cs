@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SwordController : MonoBehaviour
 {
-    public GameObject parent;
+    public GameObject character;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.transform.position = parent.transform.position;
+        gameObject.transform.position = character.transform.position;
     }
 
     // Update is called once per frame
@@ -20,16 +20,16 @@ public class SwordController : MonoBehaviour
     public void Slash()
     {
         double speed;
-        if (parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("combo1"))
+        if (character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("combo1"))
         {
-            speed = 1.5 / parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
+            speed = 1.5 / character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
         }
         else
         {
-            speed = 1.9 / parent.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
+            speed = 1.9 / character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
         }
 
-        if (parent.GetComponent<SpriteRenderer>().flipX == false)
+        if (character.GetComponent<SpriteRenderer>().flipX == false)
         {
             gameObject.transform.Translate(new Vector3((float)(speed * Time.deltaTime), 0, 0));
         }
@@ -41,7 +41,7 @@ public class SwordController : MonoBehaviour
 
     public void ResetPosition()
     {
-        gameObject.transform.position = parent.transform.position;
+        gameObject.transform.position = character.transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

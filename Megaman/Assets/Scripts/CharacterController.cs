@@ -22,9 +22,10 @@ public class CharacterController : MonoBehaviour
     private const int combo3 = 10;
     private const int skyAttack = 11;
     private const int chargeAttack = 12;
-    private const int surfAttack = 14;
+    private const int ultimate = 14;
 
     public GameObject sword;
+    public GameObject bullets;
     public VariableJoystick variableJoystick;
     public Animator animator;
     public Rigidbody2D body2D;
@@ -36,6 +37,7 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sword.SetActive(false);
         delayTime = 0;
         maxDelayTime = 0.25;
         chargeTime = 0;
@@ -94,11 +96,11 @@ public class CharacterController : MonoBehaviour
                 {
                     if (gameObject.GetComponent<SpriteRenderer>().flipX)
                     {
-                        gameObject.transform.Translate(new Vector3((float)(-speed * 1.3 * Time.deltaTime), 0, 0));
+                        gameObject.transform.Translate(new Vector3((float)(-speed * 1.5 * Time.deltaTime), 0, 0));
                     }
                     else
                     {
-                        gameObject.transform.Translate(new Vector3((float)(speed * 1.3 * Time.deltaTime), 0, 0));
+                        gameObject.transform.Translate(new Vector3((float)(speed * 1.5 * Time.deltaTime), 0, 0));
                     }
                 }
             }
@@ -194,16 +196,14 @@ public class CharacterController : MonoBehaviour
     {
         boxCollider2D.enabled = false;
         capsuleCollider2D.enabled = true;
-        if (animator.GetInteger("status") != surfAttack)
-        {
-            Idle();
-        }
+        Idle();
     }
 
     void NormalAttack1()
     {
         delayTime = 0;
         canAction = false;
+        sword.SetActive(true);
         animator.SetInteger("status", combo1);
     }
 
@@ -211,6 +211,7 @@ public class CharacterController : MonoBehaviour
     {
         delayTime = 0;
         canAction = false;
+        sword.SetActive(true);
         animator.SetInteger("status", combo2);
     }
 
@@ -218,25 +219,41 @@ public class CharacterController : MonoBehaviour
     {
         delayTime = 0;
         canAction = false;
+        sword.SetActive(true);
         animator.SetInteger("status", combo3);
     }
 
     void SkyAttack()
     {
         canAction = false;
+        sword.SetActive(true);
+        body2D.gravityScale = 0.1f;
         animator.SetInteger("status", skyAttack);
     }
 
     void ChargeAttack()
     {
         canAction = false;
+        sword.SetActive(true);
         animator.SetInteger("status", chargeAttack);
     }
 
-    public void SurfAttack()
+    public void UltimateAttack()
     {
-        canAction = false;
-        animator.SetInteger("status", surfAttack);
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("move"))
+        {
+            canAction = false;
+            animator.SetInteger("status", ultimate);
+        }
+    }
+
+    public void ActivateUltimateBullet()
+    {
+        bullets.transform.position = new Vector3(gameObject.transform.position.x,
+                                                 gameObject.transform.position.y - 0.4f,
+                                                 bullets.transform.position.z);
+        bullets.GetComponent<BulletController>().ActivateBullet();
     }
 
     public void Attack()
@@ -268,10 +285,15 @@ public class CharacterController : MonoBehaviour
     public void AttackAnimationFinished()
     {
         sword.GetComponent<SwordController>().ResetPosition();
+        sword.SetActive(false);
         canAction = true;
-        if (animator.GetInteger("status") == chargeAttack || animator.GetInteger("status") == surfAttack)
+        if (animator.GetInteger("status") == chargeAttack || animator.GetInteger("status") == ultimate)
         {
             Idle();
+        }
+        else if (animator.GetInteger("status") == skyAttack)
+        {
+            body2D.gravityScale = 1.5f;
         }
     }
 

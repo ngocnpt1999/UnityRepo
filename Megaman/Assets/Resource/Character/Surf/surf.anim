@@ -22,16 +22,12 @@ AnimationClip:
     - time: 0
       value: {fileID: 21300000, guid: 638ef8328c9dc724fb96e5a566d61d3f, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: c18de6499407bce47b73eba6c2d48275, type: 3}
+      value: {fileID: 21300000, guid: 6787d72faf12a644192208cba9877434, type: 3}
     - time: 0.18333334
       value: {fileID: 21300000, guid: 41ff5170e66082f42b34f2a3ff110b00, type: 3}
     - time: 0.28333333
-      value: {fileID: 21300000, guid: 55078f5054a1a9244807764f60ac6d2b, type: 3}
-    - time: 0.38333333
-      value: {fileID: 21300000, guid: 91a488b2cbc595948a4c915c5eedc3da, type: 3}
-    - time: 0.48333332
-      value: {fileID: 21300000, guid: c637546bd344f5b4cade1e0f079a078c, type: 3}
-    - time: 0.5833333
+      value: {fileID: 21300000, guid: d42f424ac0e0c6a4e89b5cd79b9f3160, type: 3}
+    - time: 0.75
       value: {fileID: 21300000, guid: 7c631fde0b0cf2f4e990d6a21ac7f693, type: 3}
     attribute: m_Sprite
     path: 
@@ -53,23 +49,21 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 21300000, guid: 638ef8328c9dc724fb96e5a566d61d3f, type: 3}
-    - {fileID: 21300000, guid: c18de6499407bce47b73eba6c2d48275, type: 3}
+    - {fileID: 21300000, guid: 6787d72faf12a644192208cba9877434, type: 3}
     - {fileID: 21300000, guid: 41ff5170e66082f42b34f2a3ff110b00, type: 3}
-    - {fileID: 21300000, guid: 55078f5054a1a9244807764f60ac6d2b, type: 3}
-    - {fileID: 21300000, guid: 91a488b2cbc595948a4c915c5eedc3da, type: 3}
-    - {fileID: 21300000, guid: c637546bd344f5b4cade1e0f079a078c, type: 3}
+    - {fileID: 21300000, guid: d42f424ac0e0c6a4e89b5cd79b9f3160, type: 3}
     - {fileID: 21300000, guid: 7c631fde0b0cf2f4e990d6a21ac7f693, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.59999996
+    m_StopTime: 0.76666665
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -84,7 +78,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.5833333
+  - time: 0.75
     functionName: SurfAnimationFinished
     data: 
     objectReferenceParameter: {fileID: 0}

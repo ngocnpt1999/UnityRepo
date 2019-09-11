@@ -36,6 +36,14 @@ public class GamePlayUIController : MonoBehaviour
         holding = false;
     }
 
+    public void OnUltimateAttackButtonClick()
+    {
+        if (character.GetComponent<CharacterController>().CanAction())
+        {
+            character.GetComponent<CharacterController>().UltimateAttack();
+        }
+    }
+
     public void OnJumpButtonClick()
     {
         if (character.GetComponent<CharacterController>().CanAction())
