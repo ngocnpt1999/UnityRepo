@@ -39,7 +39,7 @@ public class CharacterController : MonoBehaviour
     {
         sword.SetActive(false);
         delayTime = 0;
-        maxDelayTime = 0.25;
+        maxDelayTime = 0.28;
         chargeTime = 0;
         canAction = true;
         jumpCount = 0;
