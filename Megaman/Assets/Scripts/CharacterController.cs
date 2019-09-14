@@ -29,8 +29,8 @@ public class CharacterController : MonoBehaviour
     public VariableJoystick variableJoystick;
     public Animator animator;
     public Rigidbody2D body2D;
-    public CapsuleCollider2D capsuleCollider2D;
-    public BoxCollider2D boxCollider2D;
+    public CapsuleCollider2D normalCollider2D;
+    public BoxCollider2D surfingCollider2D;
     public double speed;
     public double jumpHeight;
 
@@ -103,13 +103,6 @@ public class CharacterController : MonoBehaviour
                         gameObject.transform.Translate(new Vector3((float)(speed * 1.5 * Time.deltaTime), 0, 0));
                     }
                 }
-            }
-        }
-        else
-        {
-            if (animator.GetInteger("status") >= 8)
-            {
-                sword.GetComponent<SwordController>().Slash();
             }
         }
     }
@@ -187,15 +180,15 @@ public class CharacterController : MonoBehaviour
             animator.GetCurrentAnimatorStateInfo(0).IsName("move"))
         {
             animator.SetInteger("status", surf);
-            capsuleCollider2D.enabled = false;
-            boxCollider2D.enabled = true;
+            normalCollider2D.enabled = false;
+            surfingCollider2D.enabled = true;
         }
     }
 
     public void SurfAnimationFinished()
     {
-        boxCollider2D.enabled = false;
-        capsuleCollider2D.enabled = true;
+        surfingCollider2D.enabled = false;
+        normalCollider2D.enabled = true;
         Idle();
     }
 
@@ -227,7 +220,10 @@ public class CharacterController : MonoBehaviour
     {
         canAction = false;
         sword.SetActive(true);
-        body2D.gravityScale = 0.1f;
+        if (body2D.velocity.y < 0)
+        {
+            body2D.gravityScale = 0.1f;
+        }
         animator.SetInteger("status", skyAttack);
     }
 
@@ -240,12 +236,9 @@ public class CharacterController : MonoBehaviour
 
     public void UltimateAttack()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("move"))
-        {
-            canAction = false;
-            animator.SetInteger("status", ultimate);
-        }
+        delayTime = 0;
+        canAction = false;
+        animator.SetInteger("status", ultimate);
     }
 
     public void ActivateUltimateBullet()
@@ -271,7 +264,7 @@ public class CharacterController : MonoBehaviour
         {
             NormalAttack3();
         }
-        else if (chargeTime >= 0.5)
+        else if (chargeTime >= 0.5 && animator.GetCurrentAnimatorStateInfo(0).IsName("charge"))
         {
             ChargeAttack();
         }
@@ -280,6 +273,11 @@ public class CharacterController : MonoBehaviour
         {
             NormalAttack1();
         }
+    }
+
+    public void SwordSlash()
+    {
+        sword.GetComponent<SwordController>().Slash();
     }
 
     public void AttackAnimationFinished()

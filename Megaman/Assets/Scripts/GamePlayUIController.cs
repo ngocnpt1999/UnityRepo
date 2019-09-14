@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GamePlayUIController : MonoBehaviour
 {
     public GameObject character;
+    public GameObject ultimateAttackButton;
 
     private bool holding;
 
@@ -40,7 +41,14 @@ public class GamePlayUIController : MonoBehaviour
     {
         if (character.GetComponent<CharacterController>().CanAction())
         {
-            character.GetComponent<CharacterController>().UltimateAttack();
+            if (!character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("surf") &&
+                !character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("jump") &&
+                !character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("falldown") &&
+                !character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("skyattack"))
+            {
+                character.GetComponent<CharacterController>().UltimateAttack();
+                ultimateAttackButton.GetComponent<ButtonController>().SetDelay(15);
+            }
         }
     }
 

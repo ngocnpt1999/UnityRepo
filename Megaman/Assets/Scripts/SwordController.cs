@@ -19,23 +19,27 @@ public class SwordController : MonoBehaviour
 
     public void Slash()
     {
-        double speed;
+        float range;
         if (character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("combo1"))
         {
-            speed = 1.5 / character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
+            range = 1.8f;
         }
         else
         {
-            speed = 1.9 / character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
+            range = 2.2f;
         }
 
         if (character.GetComponent<SpriteRenderer>().flipX == false)
         {
-            gameObject.transform.Translate(new Vector3((float)(speed * Time.deltaTime), 0, 0));
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x + range,
+                                                        gameObject.transform.position.y,
+                                                        gameObject.transform.position.z);
         }
         else
         {
-            gameObject.transform.Translate(new Vector3((float)(-speed * Time.deltaTime), 0, 0));
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x - range,
+                                                        gameObject.transform.position.y,
+                                                        gameObject.transform.position.z);
         }
     }
 
