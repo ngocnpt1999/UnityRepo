@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - ZERO
+  - X
+  - plasma
   layers:
   - Default
   - TransparentFX

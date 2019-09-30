@@ -21,7 +21,7 @@ public class ButtonController : MonoBehaviour
         if (delayTime > 0)
         {
             delayTime -= Time.deltaTime;
-            textField.text = (int)delayTime + "";
+            textField.text = ((int)delayTime + 1) + "";
             if (delayTime <= 0)
             {
                 textField.text = null;

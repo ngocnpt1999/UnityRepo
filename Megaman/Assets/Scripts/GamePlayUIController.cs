@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GamePlayUIController : MonoBehaviour
 {
     public GameObject character;
-    public GameObject ultimateAttackButton;
+    public GameObject ultimateButton;
 
     private bool holding;
 
@@ -19,7 +19,15 @@ public class GamePlayUIController : MonoBehaviour
     {
         if (holding)
         {
-            character.GetComponent<CharacterController>().Charge();
+            character.GetComponent<MainCharacterController>().Charge();
+        }
+    }
+
+    public void OnFireButtonClick()
+    {
+        if (character.GetComponent<MainCharacterController>().CanAction())
+        {
+            character.GetComponent<MainCharacterController>().Fire();
         }
     }
 
@@ -30,41 +38,53 @@ public class GamePlayUIController : MonoBehaviour
 
     public void OnAttackButtonReleased()
     {
-        if (character.GetComponent<CharacterController>().CanAction())
+        if (character.GetComponent<MainCharacterController>().CanAction())
         {
-            character.GetComponent<CharacterController>().Attack();
+            character.GetComponent<MainCharacterController>().MeleeAttack();
         }
         holding = false;
     }
 
     public void OnUltimateAttackButtonClick()
     {
-        if (character.GetComponent<CharacterController>().CanAction())
+        if (character.GetComponent<MainCharacterController>().CanAction())
         {
             if (!character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("surf") &&
                 !character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("jump") &&
                 !character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("falldown") &&
                 !character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("skyattack"))
             {
-                character.GetComponent<CharacterController>().UltimateAttack();
-                ultimateAttackButton.GetComponent<ButtonController>().SetDelay(15);
+                character.GetComponent<MainCharacterController>().UltimateAttack();
+                ultimateButton.GetComponent<ButtonController>().SetDelay(15);
+            }
+        }
+    }
+
+    public void OnUltimateFireButtonClick()
+    {
+        if (character.GetComponent<MainCharacterController>().CanAction())
+        {
+            if (!character.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("surf"))
+            {
+                character.GetComponent<MainCharacterController>().UltimateFire();
+                ultimateButton.GetComponent<ButtonController>().SetDelay(5);
             }
         }
     }
 
     public void OnJumpButtonClick()
     {
-        if (character.GetComponent<CharacterController>().CanAction())
+        if (character.GetComponent<MainCharacterController>().CanAction())
         {
-            character.GetComponent<CharacterController>().Jump();
+            character.GetComponent<MainCharacterController>().Jump();
         }
     }
 
     public void OnSurfButtonClick()
     {
-        if (character.GetComponent<CharacterController>().CanAction())
+        if (character.GetComponent<MainCharacterController>().CanAction())
         {
-            character.GetComponent<CharacterController>().Surf();
+            character.GetComponent<MainCharacterController>().Surf();
         }
     }
 }
