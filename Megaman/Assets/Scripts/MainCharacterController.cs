@@ -48,6 +48,8 @@ public class MainCharacterController : MonoBehaviour
     private Transform rightPoint;
     #endregion
 
+    private float healthPoint = 100;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -212,7 +214,7 @@ public class MainCharacterController : MonoBehaviour
         Idle();
     }
 
-    public void TakenDamage(int damage)
+    public void TakenDamage(float damage)
     {
         if (animator.GetInteger("status") != charge &&
             animator.GetInteger("status") != chargeAttack &&
@@ -220,6 +222,14 @@ public class MainCharacterController : MonoBehaviour
             animator.GetInteger("status") != ultimateFire)
         {
             canAction = false;
+            if (healthPoint > damage)
+            {
+                healthPoint -= damage;
+            }
+            else
+            {
+                healthPoint = 0;
+            }
             if (animator.GetInteger("status") == surf)
             {
                 normalCollider2D.enabled = true;
@@ -418,5 +428,10 @@ public class MainCharacterController : MonoBehaviour
     public bool CanAction()
     {
         return canAction;
+    }
+
+    public float GetHP()
+    {
+        return healthPoint;
     }
 }

@@ -6,6 +6,8 @@ public class SwordController : MonoBehaviour
 {
     public GameObject character;
 
+    private float damage = 75;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +55,7 @@ public class SwordController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.SetActive(false);
+            collision.gameObject.GetComponent<EnemyController>().TakenDamage(damage);
         }
     }
 }

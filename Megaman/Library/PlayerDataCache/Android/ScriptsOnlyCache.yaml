@@ -11,6 +11,7 @@ ScriptsOnlyBuild:
     - EnemyBulletController
     - EnemyController
     - GamePlayUIController
+    - HealthBarController
     - LoadSceneController
     - MainCharacterController
     - SwordController
@@ -28,14 +29,11 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -76,9 +74,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10660}
     - Class: 114
-      Script: {instanceID: 11142}
+      Script: {instanceID: 11144}
     - Class: 114
-      Script: {instanceID: 11526}
+      Script: {instanceID: 11528}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -149,25 +147,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11048}
     - Class: 114
-      Script: {instanceID: 11142}
+      Script: {instanceID: 11098}
     - Class: 114
-      Script: {instanceID: 11192}
+      Script: {instanceID: 11144}
     - Class: 114
-      Script: {instanceID: 11318}
+      Script: {instanceID: 11194}
     - Class: 114
-      Script: {instanceID: 11350}
+      Script: {instanceID: 11320}
     - Class: 114
-      Script: {instanceID: 11486}
+      Script: {instanceID: 11352}
     - Class: 114
-      Script: {instanceID: 11514}
+      Script: {instanceID: 11488}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 11524}
+      Script: {instanceID: 11520}
     - Class: 114
       Script: {instanceID: 11526}
     - Class: 114
-      Script: {instanceID: 11576}
+      Script: {instanceID: 11528}
+    - Class: 114
+      Script: {instanceID: 11578}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -559,6 +559,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: 70245ce586d7e8864ca5dbe4982f5ff0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HealthBarController
   - hash:
       serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a

@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
     public GameObject weapon;
     public float range;
 
+    private float healthPoint = 100;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,5 +93,18 @@ public class EnemyController : MonoBehaviour
         activeTime = 0;
         weapon.transform.position = gameObject.transform.position;
         weapon.SetActive(true);
+    }
+
+    public void TakenDamage(float damage)
+    {
+        if (healthPoint > damage)
+        {
+            healthPoint -= damage;
+        }
+        else
+        {
+            healthPoint = 0;
+            gameObject.SetActive(false);
+        }
     }
 }

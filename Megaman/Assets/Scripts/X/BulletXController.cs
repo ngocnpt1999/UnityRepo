@@ -8,10 +8,20 @@ public class BulletXController : MonoBehaviour
 
     public int speedOfBullet;
 
+    private float damage;
+
     // Start is called before the first frame update
     void Start()
     {
         distance = 0;
+        if (gameObject.tag == "plasma")
+        {
+            damage = 35;
+        }
+        else
+        {
+            damage = 150;
+        }
     }
 
     // Update is called once per frame
@@ -48,8 +58,9 @@ public class BulletXController : MonoBehaviour
             if (gameObject.tag == "plasma")
             {
                 gameObject.SetActive(false);
+                distance = 0;
             }
-            collision.gameObject.SetActive(false);
+            collision.gameObject.GetComponent<EnemyController>().TakenDamage(damage);
         }
     }
 }
